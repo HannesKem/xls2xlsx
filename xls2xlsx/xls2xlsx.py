@@ -113,7 +113,10 @@ class XLS2XLSX:
 
             try:            # Avoidance for issue #11 (though I cannot duplicate the problem w/o the input file)
                 xls_font = self.book.font_list[xf.font_index]       # Font object
-                font.b = xls_font.bold
+                if (xls_font.bold or xls_font.weight == 700): # 700 is equal to bold according to https://xlrd.readthedocs.io/en/latest/api.html
+                    font.b = True
+                else:
+                    font.b = False
                 font.i = xls_font.italic
                 if xls_font.character_set:
                     font.charset = xls_font.character_set
