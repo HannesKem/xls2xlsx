@@ -258,6 +258,8 @@ class XLS2XLSX:
                     font, fill, border, alignment, number_format, protection = self.xls_style_to_xlsx(sheet.cell_xf_index(row, col))
                     #if number_format != 'General':
                         #print(f'({rw},{cc}).number_format = {number_format}')
+                    if number_format is None:
+                        number_format = 'General'
                     if isinstance(value, str):
                         if '\n' in value and not alignment.wrap_text:
                             alignment = copy.deepcopy(alignment)
